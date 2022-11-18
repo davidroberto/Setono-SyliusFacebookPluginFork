@@ -1,0 +1,53 @@
+sylius_grid:
+    templates:
+        action:
+            setono_facebook_reset_failed_events: "@SetonoSyliusFacebookPlugin/Admin/Grid/Action/setono_facebook_reset_failed_events.html.twig"
+    grids:
+        setono_sylius_facebook_admin_pixel:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%setono_sylius_facebook.model.pixel.class%"
+            fields:
+                pixelId:
+                    type: twig
+                    label: setono_sylius_facebook.ui.pixel_id
+                    path: .
+                    options:
+                        template: "@SetonoSyliusFacebookPlugin/Admin/Grid/Field/pixel.html.twig"
+                events_statistics:
+                    type: twig
+                    label: setono_sylius_facebook.ui.events_statistics
+                    path: .
+                    options:
+                        template: "@SetonoSyliusFacebookPlugin/Admin/Grid/Field/statistics.html.twig"
+                channels:
+                    type: twig
+                    label: sylius.ui.channels
+                    options:
+                        template: "@SetonoSyliusFacebookPlugin/Admin/Grid/Field/channels.html.twig"
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [pixelId]
+                enabled:
+                    type: boolean
+                    label: sylius.ui.enabled
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    setono_facebook_reset_failed_events:
+                        type: setono_facebook_reset_failed_events
+                    delete:
+                        type: delete
